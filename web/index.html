@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>J.A.R.V.I.S.</title>
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#04070d" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <!-- /PWA -->
+  <!-- Favicon (reuses the PWA icon; stops the /favicon.ico 404) -->
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+  <!-- DM Mono, self-hosted (no CDN) so the HUD renders correctly offline/air-gapped -->
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body data-state="idle">
+  <!-- Background environment: vignette + tech grid + scanlines -->
+  <div id="bg"></div>
+
+  <!-- Reactive reactor orb -->
+  <canvas id="orb"></canvas>
+
+  <!-- Holographic HUD overlay -->
+  <div id="hud">
+    <span class="bracket tl"></span>
+    <span class="bracket tr"></span>
+    <span class="bracket bl"></span>
+    <span class="bracket br"></span>
+
+    <div id="brand">
+      <div class="name">J.A.R.V.I.S.</div>
+      <div class="tag">SYSTEM <span class="online">// ONLINE</span></div>
+    </div>
+
+    <div id="stateReadout">
+      <span class="lamp"></span>
+      <span class="label" id="stateLabel">IDLE</span>
+    </div>
+
+    <div id="telemetry">
+      <div class="row">CORE&nbsp; <span class="v" id="telCore">0.00</span></div>
+      <div class="row">PWR&nbsp;&nbsp; <span class="v" id="telPwr">98.4%</span></div>
+      <div class="row">SIG&nbsp;&nbsp; <span class="bar"><span id="telBar"></span></span></div>
+      <div class="row">UPLINK <span class="v" id="telLink">SECURE</span></div>
+      <div class="row" id="telClock">--:--:--</div>
+    </div>
+
+    <div id="console">
+      <div class="chead">// console log</div>
+      <div id="log"></div>
+    </div>
+  </div>
+
+  <div id="approvals"></div>
+
+  <!-- Bottom command dock -->
+  <div id="dock">
+    <div id="interim"></div>
+    <div id="micWrap">
+      <button id="mic" title="Tap or hold to talk" aria-label="Tap or hold to talk">&#9678;</button>
+    </div>
+    <div id="micLabel">tap to talk</div>
+    <button id="wakeToggle" class="wake-toggle" data-wake="off" aria-pressed="false"
+            title="Hands-free wake word. Say &quot;Jarvis…&quot; to activate. Requires this tab open.">
+      WAKE: <span id="wakeState">OFF</span>
+    </button>
+    <div id="wakeNote">wake word needs this tab open</div>
+    <div id="textbar">
+      <input id="textInput" type="text" placeholder="or type a command…" autocomplete="off" />
+      <button id="textSend">Send</button>
+    </div>
+  </div>
+
+  <div id="status" class="off"><span class="dot"></span><span id="statusText">connecting</span></div>
+
+  <!-- Vendored Three.js (local, never CDN), then the orb, then app wiring -->
+  <script src="/vendor/three.min.js"></script>
+  <script src="/orb.js?v=8"></script>
+  <script src="/app.js"></script>
+  <!-- Service Worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.warn('SW registration failed:', err);
+      });
+    }
+  </script>
+</body>
+</html>

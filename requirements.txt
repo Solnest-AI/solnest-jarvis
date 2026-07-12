@@ -1,0 +1,20 @@
+# JARVIS — dependencies (cross-platform: Mac + Windows + Linux).
+fastapi>=0.115
+uvicorn[standard]>=0.30
+websockets>=13
+python-dotenv>=1.0
+anthropic>=0.40
+requests>=2.31
+httpx>=0.28
+# Timezone database — Windows ships no system tz data, so zoneinfo/timezones
+# need this. Harmless on Mac/Linux.
+tzdata>=2024.1
+# Phone voice (records on phone, transcribes locally). The speech MODEL downloads
+# on first use — it is NOT bundled in this download.
+faster-whisper>=1.0
+
+# ── Optional power features (uncomment only if you set them up) ───────────────
+# Free engine via your Claude subscription instead of an API key:
+#   claude-agent-sdk>=0.2.87
+# Long-term memory is folder-only (plain .md files) and needs NO extra packages —
+# just set VAULT_DIR in your .env to a notes folder (e.g. an Obsidian vault).

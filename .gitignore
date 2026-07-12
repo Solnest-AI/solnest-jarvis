@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+state/
+logs/
+roster.json
+.DS_Store
+# Ship the memory/ folder + its README, but never commit the user's own memories.
+memory/assistant-memory.md

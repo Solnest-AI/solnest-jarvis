@@ -25,8 +25,15 @@ need() {  # need VAR "Human name"
 
 echo "Checking your .env..."
 
-need ANTHROPIC_API_KEY "JARVIS's brain"
-need ELEVENLABS_API_KEY "JARVIS's voice"
+need ANTHROPIC_API_KEY "JARVIS's brain (required)"
+need ELEVENLABS_API_KEY "JARVIS's premium voice (optional)"
+
+# The premium voice needs BOTH the key and a voice id. A blank voice id turns
+# TTS off silently (see jarvis/voice_tts.py), so call that out here.
+if [ -n "${ELEVENLABS_API_KEY:-}" ] && [ -z "${ELEVENLABS_VOICE_ID:-}" ]; then
+  echo "  ⚠️  ELEVENLABS_VOICE_ID is blank, so the premium voice stays OFF."
+  echo "     Copy the ELEVENLABS_VOICE_ID line from .env.template into your .env."
+fi
 
 if [ "$found" -eq 0 ]; then
   echo
@@ -36,4 +43,5 @@ if [ "$found" -eq 0 ]; then
 fi
 echo
 
-echo; echo "Done. Now FULLY QUIT AND REOPEN Claude Code so it picks up your keys."
+echo; echo "Done. Now start JARVIS:  bash run.sh"
+echo "(He reads .env on startup, so restart him after any change to it.)"

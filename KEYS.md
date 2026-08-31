@@ -14,18 +14,18 @@ Anything you type into the chat is saved in the conversation forever. Put your k
 2. **Paste each key after the `=` sign.** No quotes, no spaces:
 
    ```
-   EXA_API_KEY=abc123xyz
+   ANTHROPIC_API_KEY=sk-ant-abc123xyz
    ```
    not
    ```
-   EXA_API_KEY = "abc123xyz"
+   ANTHROPIC_API_KEY = "sk-ant-abc123xyz"
    ```
 
 3. **Save the file.**
 
-4. **Tell Claude "I've filled in the .env"** — and don't paste anything into the chat. Claude runs the setup script, which reads the file and connects everything.
+4. **Check it.** Run `bash setup-keys.sh` (Mac) or `powershell -File setup-keys.ps1` (Windows). It reports which keys it found without ever printing them. Don't paste anything into the chat.
 
-5. **Fully quit and reopen Claude Code.** It only picks up new keys on startup.
+5. **Start JARVIS.** Mac: `bash run.sh`. Windows: double-click `run.bat`. He reads `.env` on startup, so restart him after any change. There is nothing to restart in Claude Code. JARVIS is his own local server.
 
 ---
 
@@ -34,7 +34,8 @@ Anything you type into the chat is saved in the conversation forever. Put your k
 | Key | What it's for | Required? | Where to get it |
 |---|---|---|---|
 | `ANTHROPIC_API_KEY` | JARVIS's brain | Yes | https://console.anthropic.com |
-| `ELEVENLABS_API_KEY` | JARVIS's voice | Yes | https://elevenlabs.io |
+| `ELEVENLABS_API_KEY` | JARVIS's premium voice | Optional. Chrome's free voice works without it | https://elevenlabs.io |
+| `ELEVENLABS_VOICE_ID` | Which voice he speaks in | Only if you set the key above. Comes pre-filled with the JARVIS voice. **Do not leave it blank.** A blank voice id turns the premium voice off with no error, so JARVIS goes quiet and only the log says why | your ElevenLabs voice library |
 | `VAULT_DIR` | Folder for JARVIS's memories (optional — a path, not a key) | Optional | any notes folder |
 | `SUPABASE_ACCESS_TOKEN` | Your own Supabase (optional) | Optional | https://supabase.com/dashboard/account/tokens |
 | `SUPABASE_PROJECT_REF` | Your Supabase project ref (optional) | Optional | Supabase project settings |

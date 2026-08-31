@@ -22,6 +22,7 @@ Everything runs locally on your machine. **You use your own API keys — nothing
 nothing is hard-coded.** This guide takes you from zero to talking in about 15 minutes.
 
 > 💻 **Works on:** Mac or Windows · use **Google Chrome** for voice.
+> 📄 **Licence:** MIT. Fork it, change it, ship it. See [LICENSE](LICENSE).
 
 ---
 
@@ -39,8 +40,14 @@ nothing is hard-coded.** This guide takes you from zero to talking in about 15 m
 - **Mac:** open **Terminal**, run `python3 --version`. If it's 3.10+, you're set; else install from https://www.python.org/downloads/.
 - **Windows:** install from https://www.python.org/downloads/ and **✅ check "Add Python to PATH"** during install.
 
-## Step 2 — Unzip
-Unzip the `Jarvis` folder somewhere easy (Desktop is fine).
+## Step 2 — Get the files
+Clone the repo somewhere easy (Desktop is fine):
+
+```bash
+git clone https://github.com/Solnest-AI/solnest-jarvis.git
+```
+
+(Downloaded the Skool zip instead? Unzip it somewhere easy and use that folder.)
 
 ## Step 3 — Run setup (one time)
 - **Mac:** in Terminal: `cd ` then drag the folder in, press Enter, then `bash setup.sh`

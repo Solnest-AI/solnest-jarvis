@@ -38,7 +38,7 @@ Two more that live **outside** the folder — do not touch either:
 - `~/.jarvis/roster.json` — their specialist roster.
 - Their Google credentials folder (wherever `CREDS_DIR` points).
 
-`.env.example` SHOULD be overwritten. It's an empty template, not their config.
+`.env.example` and `.env.template` SHOULD both be overwritten. They are blank templates, not their config. Their real config is `.env`, which is on the preserve list above.
 
 ## Step 3 — Pull the latest
 
@@ -57,7 +57,8 @@ Update these:
 - `web/` (the interface)
 - `server.py`, `configure.py`, `requirements.txt`
 - `setup.sh`, `setup.bat`, `run.sh`, `run.bat`, `share.sh`, `share.bat`
-- `README.md`, `CLAUDE.md`, `AGENTS.md`, `OBSIDIAN-MEMORY.md`, `CHANGELOG.md`, `VERSION`
+- `README.md`, `CLAUDE.md`, `AGENTS.md`, `OBSIDIAN-MEMORY.md`, `KEYS.md`, `CHANGELOG.md`, `LICENSE`, `VERSION`
+- `.env.example`, `.env.template`, `setup-keys.sh`, `setup-keys.ps1` (templates and helpers, never their `.env`)
 - `persona.md` — **ask first.** If they've customized JARVIS's personality, overwriting it is rude. Ask: *"Did you edit JARVIS's personality? If so I'll leave it alone."* When in doubt, leave it.
 
 If `requirements.txt` changed, re-run the dependency install into the existing `.venv`. Say that out loud — it takes a minute.

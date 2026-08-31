@@ -28,8 +28,15 @@ function Need($name, $label) {
 
 Write-Host "Checking your .env..."
 
-Need "ANTHROPIC_API_KEY" "JARVIS's brain"
-Need "ELEVENLABS_API_KEY" "JARVIS's voice"
+Need "ANTHROPIC_API_KEY" "JARVIS's brain (required)"
+Need "ELEVENLABS_API_KEY" "JARVIS's premium voice (optional)"
+
+# The premium voice needs BOTH the key and a voice id. A blank voice id turns
+# TTS off silently (see jarvis/voice_tts.py), so call that out here.
+if ($env:ELEVENLABS_API_KEY -and -not $env:ELEVENLABS_VOICE_ID) {
+  Write-Host "  [!] ELEVENLABS_VOICE_ID is blank, so the premium voice stays OFF." -ForegroundColor Yellow
+  Write-Host "      Copy the ELEVENLABS_VOICE_ID line from .env.template into your .env."
+}
 
 if ($found -eq 0) {
   Write-Host ""
@@ -39,4 +46,5 @@ if ($found -eq 0) {
 }
 Write-Host ""
 
-Write-Host ""; Write-Host "Done. Now FULLY QUIT AND REOPEN Claude Code so it picks up your keys."
+Write-Host ""; Write-Host "Done. Now start JARVIS:  run.bat  (Mac: bash run.sh)"
+Write-Host "(He reads .env on startup, so restart him after any change to it.)"
